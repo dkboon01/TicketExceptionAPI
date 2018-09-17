@@ -18,5 +18,7 @@ namespace TicketExceptionAPI
         public string Custom { get; set; }
         public string Notes { get; set; }
         public string Service { get; set; }
+        public string EquipPart { get; set; }
+        public string Other { get; set; }
     }
 }

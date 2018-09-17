@@ -49,9 +49,11 @@
         <ComplexType Name="SelectTicketsAcceptedandResolvedPostingStatus_Result">
           <Property Type="Int32" Name="serviceticketid" Nullable="false" />
           <Property Type="Int32" Name="ticket_number" Nullable="false" />
-          <Property Type="String" Name="Custom" Nullable="false" MaxLength="22" />
-          <Property Type="String" Name="Notes" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="Service" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Custom" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Service" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="EquipPart" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Other" Nullable="false" MaxLength="4" />
           </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -77,6 +79,8 @@
                 <ScalarProperty Name="Custom" ColumnName="Custom" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="EquipPart" ColumnName="EquipPart" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
