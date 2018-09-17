@@ -19,6 +19,9 @@ namespace TicketExceptionAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Turned off any security for now --add oauth later
+      //      config.Filters.Add(new APIService.BasicAuthenticationAttribute());
         }
     }
 }

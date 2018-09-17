@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Cust_Silco_ServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="CheckMultipleResolutionNotes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="serviceticketid" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="service_ticket_id" Type="int" />
+                <Property Name="nteerrorstatus" Type="int" />
+                <Property Name="nteerrortype" Type="varchar" MaxLength="30" />
+                <Property Name="nteerrortext" Type="varchar" MaxLength="100" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FnGetMismatchTicketTechSvcCo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="serviceticketid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectTicketsAcceptedandResolvedPostingStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="serviceticketid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UnEvenSplitDataMissingPassFail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="serviceticketid" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Cust_Silco_ServiceModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Cust_Silco_ServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="CheckMultipleResolutionNotes_Result">
+          <Property Name="service_ticket_id" Type="Int32" />
+          <Property Name="nteerrorstatus" Type="Int32" />
+          <Property Name="nteerrortype" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nteerrortext" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <EntityContainer Name="Cust_Silco_ServiceEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="CheckMultipleResolutionNotes" IsComposable="true" ReturnType="Collection(Cust_Silco_ServiceModel.CheckMultipleResolutionNotes_Result)">
+          <Parameter Name="serviceticketid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectTicketsAcceptedandResolvedPostingStatus" ReturnType="Collection(Cust_Silco_ServiceModel.SelectTicketsAcceptedandResolvedPostingStatus_Result)">
+          <Parameter Name="serviceticketid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SelectTicketsAcceptedandResolvedPostingStatus_Result">
+          <Property Type="Int32" Name="serviceticketid" Nullable="false" />
+          <Property Type="Int32" Name="ticket_number" Nullable="false" />
+          <Property Type="String" Name="Custom" Nullable="false" MaxLength="22" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Service" Nullable="true" MaxLength="30" />
+          </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Cust_Silco_ServiceModelStoreContainer" CdmEntityContainer="Cust_Silco_ServiceEntities">
+          <FunctionImportMapping FunctionName="Cust_Silco_ServiceModel.Store.CheckMultipleResolutionNotes" FunctionImportName="CheckMultipleResolutionNotes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Cust_Silco_ServiceModel.CheckMultipleResolutionNotes_Result">
+                <ScalarProperty Name="service_ticket_id" ColumnName="service_ticket_id" />
+                <ScalarProperty Name="nteerrorstatus" ColumnName="nteerrorstatus" />
+                <ScalarProperty Name="nteerrortype" ColumnName="nteerrortype" />
+                <ScalarProperty Name="nteerrortext" ColumnName="nteerrortext" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectTicketsAcceptedandResolvedPostingStatus" FunctionName="Cust_Silco_ServiceModel.Store.SelectTicketsAcceptedandResolvedPostingStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Cust_Silco_ServiceModel.SelectTicketsAcceptedandResolvedPostingStatus_Result">
+                <ScalarProperty Name="serviceticketid" ColumnName="serviceticketid" />
+                <ScalarProperty Name="ticket_number" ColumnName="ticket_number" />
+                <ScalarProperty Name="Custom" ColumnName="Custom" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
